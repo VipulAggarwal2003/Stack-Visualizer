@@ -24,7 +24,7 @@ document.getElementById('conversionType').addEventListener('change', function ()
     localStorage.setItem('selectedConversionType', selectedValue)
     if (selectedValue === 'prefix') {
        
-        window.location.href = 'index.html';
+        window.location.href = 'prefix.html';
         // Redirect to Infix to Prefix page
     } else if (selectedValue === 'postfix') {
 
