@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expression Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="postfix.js"></script>
+    <script src="prefix.js"></script> -->
+</head>
+
+<body>
+    <div class="container-footer">
+        <label for="conversionType" style="font: bold; font-size: large;">Choose Type:</label>
+        <select id="conversionType">
+            <option value="" disabled selected>--Select--</option>
+            <option value="prefix" class="prefixSelector">Infix to Prefix</option>
+            <option class="postfixSelector" value="postfix">Infix to Postfix</option>
+        </select>
+    </div>
+
+    <header id="converterHeader" style="font-size:50px; font-weight: bolder">Infix Expression Converter</header>
+    
+    <div class="container">
+        <div class="container-header">
+            <h3 class="inputText">Input:</h3>
+            <input id="myId" type="text" class="text" placeholder="Enter Infix Expression">
+
+            <button class="push">Convert</button>
+            <button class="reset" >Reset</button>
+        </div>
+        <div class="container-body">
+            <div class="stack-section">
+                <h3>Stack Visualization</h3>
+                <div class="stack">
+                    <div class="main-stack-bucket"></div>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class="sec1">
+                    <h3>Top of the Stack:</h3>
+                    <div class="box"></div>
+                </div>
+                <div class="sec2">
+                    <h3 class="postfixExp">Postfix Expression:</h3>
+                    <div class="box-postfix"></div>
+                </div>
+
+                <div class="message-box">
+                    <h2>Step Wise Execution</h2>
+                    <div class="message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="prefix.js">
+    </script>
+
+    
+</body>
+
+</html>  
