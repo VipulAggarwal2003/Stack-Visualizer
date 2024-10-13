@@ -1,35 +1,36 @@
-
-  window.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('firstVisit')) {
-      localStorage.clear();
-      localStorage.setItem('firstVisit', 'true'); // Set the flag
-  }
-    const savedValue = localStorage.getItem('selectedConversionType');
-    console.log(savedValue);
-    if (savedValue === 'prefix' || savedValue === 'postfix') {
-      if(savedValue == 'prefix')
-        document.querySelector("#converterHeader").innerHTML = "Infix to Prefix Converter";
-      else
-      document.querySelector("#converterHeader").innerHTML = "Infix to Postfix Converter";
-      document.getElementById('conversionType').value = savedValue;
-  } else {
-      
-      document.getElementById('conversionType').value = "";
-  }
-
-});  
-document.getElementById('conversionType').addEventListener('change', function () {
-    const selectedValue = this.value;
-    localStorage.setItem('selectedConversionType', selectedValue)
-    if (selectedValue === 'prefix') {
-        
-        window.location.href = 'prefix.html'; 
-        // Redirect to Infix to Prefix page
-    } else if (selectedValue === 'postfix') {
-        window.location.href = 'postfix.html';
-         // Redirect to Infix to Postfix page
+(function(){
+ 
+//   if (!localStorage.getItem('firstVisit')) {
+//     localStorage.clear();
+//     localStorage.setItem('firstVisit', 'true'); // Set the flag
+// }
+  const savedValue =  document.getElementById('conversionType').value//localStorage.getItem('selectedConversionType');
+  console.log(savedValue);
+  const parent = document.querySelector(".container-header");
+  const child = parent.children[1];
+  const newInputValue = document.createElement("input");
+  newInputValue.id = "myId";
+  newInputValue.classList.add("text");
+  newInputValue.type = "text";
+  newInputValue.style.width ="400px";
+  newInputValue.style.height="50px";
+  newInputValue.placeholder = "Enter Infix Expression";
+  parent.replaceChild(newInputValue,child);
+  if (savedValue === 'prefix' || savedValue === 'postfix') {
+    document.querySelector(".postfixExp").innerHTML = "Postfix Expression";
+    document.querySelector(".box-postfix").innerHTML = "";
+    document.querySelector(".push").style.cursor =  "pointer";
+    if(savedValue == 'prefix'){
+      document.querySelector("#converterHeader").innerHTML = "Infix to Prefix Converter"; 
     }
-});
+    else
+    document.querySelector("#converterHeader").innerHTML = "Infix to Postfix Converter";
+    document.getElementById('conversionType').value = savedValue;
+} else {
+    
+    document.getElementById('conversionType').value = "";
+}
+
   const push = document.querySelector(".push");
   const reset = document.querySelector(".reset");
   const bucket = document.querySelector(".main-stack-bucket");
@@ -43,6 +44,7 @@ document.getElementById('conversionType').addEventListener('change', function ()
   let newInputElement;
   let DivElement;
   let temp;
+  let time;
   const precedence = {
     "%": -1,
     "(": -1,
@@ -160,7 +162,17 @@ document.getElementById('conversionType').addEventListener('change', function ()
     // Replace the input with the new div
     const parent = document.querySelector(".container-header");
     const child = parent.children[1];
-    parent.replaceChild(newDivElement, child);
+    let inputTag = document.querySelector(".inputText");
+    
+    setTimeout(()=>{
+      inputTag.innerHTML = "Reversed Input :";
+      inputTag.style.marginTop = "1px";
+    //  inputTag.style.marginLeft = "65px";
+      console.log(inputTag.style.marginLeft);
+      parent.replaceChild(newDivElement, child);
+      displayMessage("");
+    },300);
+    
   
     newDivElement.style.color = "black";
     newDivElement.style.fontSize = "27px";
@@ -216,9 +228,12 @@ document.getElementById('conversionType').addEventListener('change', function ()
   
       return chars?.join(''); 
   }
-
+ 
   push.addEventListener("click", () => {
-      prefixExpression = "";
+    setTimeout(()=>{
+      displayMessage("Reverse the given Expression....");
+    },1);
+    prefixExpression = "";
     while (operatorStack.length > 0) operatorStack.pop();
     updateStackView();
     boxPostfix.innerHTML = prefixExpression;
@@ -233,16 +248,27 @@ document.getElementById('conversionType').addEventListener('change', function ()
       return;
     }
     temp = expression;
-    let inputTag = document.querySelector(".inputText");
-    inputTag.innerHTML = "Reversed Input :";
+  
     let reverseInput = findReverse(expression);
+    document.querySelector(".push").style.marginLeft = "50px";
+    document.querySelector("#myId").style.marginRight = "65px";
+    document.querySelector(".push").style.marginRight = "10px";
     changeInputToDiv(reverseInput);
+    
+    document.querySelector(".container-header").style.marginTop = "1px";
+    document.querySelector(".push").style.marginLeft = "20px";
+    document.querySelector(".reset").style.marginRight = "120px";
+    document.querySelector(".push").style.marginRight = "30px";
+    console.log(document.querySelector(".inputText").style.marginLeft);
+    document.querySelector(".inputText").style.marginLeft = "65px";
     let i;
+   setTimeout(()=>{
     for (i = 0; i < reverseInput?.length; i++) {
       setTimeout(((char,idx) => () => {
         processInput(char, reverseInput, idx);
       })(reverseInput[i], i), i * 1500);
     }
+   },300);
 
     setTimeout(() => {
       while (operatorStack?.length > 0) {
@@ -356,3 +382,4 @@ document.getElementById('conversionType').addEventListener('change', function ()
   };
 
 // }
+})();

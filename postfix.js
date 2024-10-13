@@ -1,37 +1,35 @@
-
-  window.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('firstVisit')) {
-      localStorage.clear();
-      localStorage.setItem('firstVisit', 'true'); // Set the flag for first visit
-    }
-    const savedValue = localStorage.getItem('selectedConversionType');
-    console.log(savedValue);
+(function(){
+  
+  // if (!localStorage.getItem('firstVisit')) {
+  //   localStorage.clear();
+  //   localStorage.setItem('firstVisit', 'true'); // Set the flag for first visit
+  // }
+  const savedValue = document.getElementById('conversionType').value//localStorage.getItem('selectedConversionType');
+  console.log(savedValue);
+  const parent = document.querySelector(".container-header");
+  const child = parent.children[1];
+  const newInputValue = document.createElement("input");
+  newInputValue.id = "myId";
+  newInputValue.classList.add("text");
+  newInputValue.type = "text";
+  newInputValue.style.width ="400px";
+  newInputValue.style.height="50px";
+  newInputValue.placeholder = "Enter Infix Expression";
+  parent.replaceChild(newInputValue,child);
+  if (savedValue === 'prefix' || savedValue === 'postfix') {
+    document.querySelector(".postfixExp").innerHTML = "Postfix Expression";
+    document.querySelector(".box-postfix").innerHTML = "";
+    document.querySelector(".push").style.cursor =  "pointer";
+    if(savedValue == 'prefix')
+      document.querySelector("#converterHeader").innerHTML = "Infix to Prefix Converter";
+    else
+    document.querySelector("#converterHeader").innerHTML = "Infix to Postfix Converter";
+    document.getElementById('conversionType').value = savedValue;
+} else {
     
-    if (savedValue === 'prefix' || savedValue === 'postfix') {
-      if(savedValue == 'prefix')
-        document.querySelector("#converterHeader").innerHTML = "Infix to Prefix Converter";
-      else
-      document.querySelector("#converterHeader").innerHTML = "Infix to Postfix Converter";
-      document.getElementById('conversionType').value = savedValue;
-  } else {
-      
-      document.getElementById('conversionType').value = "";
-  }
-});  
-document.getElementById('conversionType').addEventListener('change', function () {
-    const selectedValue = this.value;
-    
-    localStorage.setItem('selectedConversionType', selectedValue)
-    if (selectedValue === 'prefix') {
-       
-        window.location.href = 'prefix.html';
-        // Redirect to Infix to Prefix page
-    } else if (selectedValue === 'postfix') {
+    document.getElementById('conversionType').value = "";
+}
 
-        window.location.href = 'postfix.html'; 
-        // Redirect to Infix to Postfix page
-    }
-});
 const push = document.querySelector(".push");
 const reset = document.querySelector(".reset");
 const bucket = document.querySelector(".main-stack-bucket");
@@ -198,8 +196,10 @@ push.addEventListener("click", () => {
     displayMessage("Please enter a valid Infix expression !");
     return;
   }
-
+  document.querySelector("#myId").style.marginRight = "30px";
   changeInputToDiv(expression);
+  document.querySelector("#myId").style.marginRight = "10px";
+  document.querySelector(".push").style.marginLeft = "5px";
   const converter = document.querySelector(".push");
   converter.style.cursor = "not-allowed";
   let i;
@@ -301,3 +301,5 @@ const infixChecker = (expression) => {
 };
 
 // }
+
+})();
