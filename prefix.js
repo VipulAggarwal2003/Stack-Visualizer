@@ -176,11 +176,9 @@
     setTimeout(() => {
       inputTag.innerHTML = "Reversed Input :";
       inputTag.style.marginTop = "1px";
-      //  inputTag.style.marginLeft = "65px";
-      console.log(inputTag.style.marginLeft);
       parent.replaceChild(newDivElement, child);
       displayMessage("");
-    }, 300);
+    }, 700);
 
     newDivElement.style.color = "black";
     newDivElement.style.fontSize = "27px";
@@ -278,10 +276,10 @@
           ((char, idx) => () => {
             processInput(char, reverseInput, idx);
           })(reverseInput[i], i),
-          i * 1500
+          i * 1600
         );
       }
-    }, 300);
+    }, 700);
 
     setTimeout(() => {
       while (operatorStack?.length > 0) {
@@ -299,9 +297,6 @@
       boxPostfix.innerHTML = prefixExpression;
       setTimeout(() => {
         displayMessage("Reverse the postfix Expression....");
-      }, 1);
-
-      setTimeout(() => {
         const divElements = document.querySelectorAll("#myId span"); // Get all spans inside the div
         divElements.forEach((span) => {
           span.style.color = "black"; // Change color to black
@@ -312,7 +307,9 @@
           inputTag.innerHTML = "Input:";
           let inp = document.querySelector("#myId");
           inp.innerHTML = temp;
+      }, 50);
 
+      setTimeout(() => {
           setTimeout(() => {
             let headTag = document.querySelector(".postfixExp");
             headTag.innerHTML = "Prefix Expression";
@@ -322,11 +319,11 @@
             setTimeout(() => {
               displayMessage("Expression is Evaluated");
               document.querySelector(".reset").style.cursor = "pointer";
-            }, 1000);
-          }, 2000);
+            }, 1100);
+          }, 2100);
         });
       }, 1500);
-    }, reverseInput?.length * 1500);
+    }, reverseInput?.length * 1600);
   });
 
   reset.addEventListener("click", () => {
